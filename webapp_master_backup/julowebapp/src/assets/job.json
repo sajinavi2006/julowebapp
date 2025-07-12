@@ -1,0 +1,167 @@
+[
+  {
+    "value" : "Admin / Finance / HR",
+    "child" : [
+      "Admin",
+      "Akuntan / Finance",
+      "HR",
+      "Office Boy",
+      "Sekretaris",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Entertainment / Event",
+    "child" : [
+      "DJ / Musisi",
+      "Event Organizer",
+      "Kameraman",
+      "Penyanyi / Penari / Model",
+      "Produser / Sutradara",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Hukum / Security / Politik",
+    "child" : [
+      "Anggota Pemerintahan",
+      "Hakim / Jaksa / Pengacara",
+      "Notaris",
+      "Ormas",
+      "Pemuka Agama",
+      "Satpam",
+      "TNI / Polisi",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Kesehatan",
+    "child" : [
+      "Apoteker",
+      "Dokter",
+      "Perawat",
+      "Teknisi Laboratorium",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Konstruksi / Real Estate",
+    "child" : [
+      "Arsitek / Tehnik Sipil",
+      "Interior Designer",
+      "Mandor",
+      "Pemborong",
+      "Proyek Manager / Surveyor",
+      "Real Estate Broker",
+      "Tukang Bangunan",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Media",
+    "child" : [
+      "Kameraman",
+      "Penulis / Editor",
+      "Wartawan",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Pabrik / Gudang",
+    "child" : [
+      "Buruh Pabrik / Gudang",
+      "Kepala Pabrik / Gudang",
+      "Teknisi Mesin",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Perawatan Tubuh",
+    "child" : [
+      "Fashion Designer",
+      "Gym / Fitnes",
+      "Pelatih / Trainer",
+      "Salon / Spa / Panti Pijat",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Perbankan",
+    "child" : [
+      "Back-office",
+      "Bank Teller",
+      "CS Bank",
+      "Credit Analyst",
+      "Kolektor",
+      "Resepsionis",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Sales / Marketing",
+    "child" : [
+      "Account Executive / Manager",
+      "Salesman",
+      "SPG",
+      "Telemarketing",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Service",
+    "child" : [
+      "Customer Service",
+      "Kasir",
+      "Kebersihan",
+      "Koki",
+      "Pelayan / Pramuniaga",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Tehnik / Computer",
+    "child" : [
+      "Engineer / Ahli Tehnik",
+      "Penulis Teknikal",
+      "Programmer / Developer",
+      "R&D / Ilmuwan / Peneliti",
+      "Warnet",
+      "Otomotif",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Transportasi",
+    "child" : [
+      "Supir / Ojek",
+      "Agen Perjalanan",
+      "Kurir / Ekspedisi",
+      "Pelaut / Staff Kapal / Nahkoda Kapal",
+      "Pilot / Staff Penerbangan",
+      "Sewa Kendaraan",
+      "Masinis / Kereta Api",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Staf Rumah Tangga",
+    "child" : [
+      "Babysitter / Perawat",
+      "Pembantu Rumah Tangga",
+      "Supir",
+      "Tukang Kebun",
+      "Lainnya"
+    ]
+  },
+  {
+    "value" : "Pedagang",
+    "child" : [
+      "Pangan",
+      "Elektronik",
+      "Fashion",
+      "Bangunan",
+      "Onderdil",
+      "Lainnya"
+    ]
+  }
+]

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <filter id="Path" x="0" y="0" width="60" height="60" filterUnits="userSpaceOnUse">
+      <feOffset dy="2" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feFlood flood-opacity="0.2"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="0.5" y1="-1.401" x2="0.5" y2="2.253" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#00acf0"/>
+      <stop offset="1" stop-color="#0694c9"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" y1="0" y2="1" xlink:href="#linear-gradient"/>
+  </defs>
+  <g id="ic_camera" transform="translate(15955 -18081)">
+    <rect id="Android_Atoms_Icon_48pxCamera_TakePhoto_background" data-name="Android/Atoms/Icon/48pxCamera/TakePhoto background" width="48" height="48" transform="translate(-15949 18085)" fill="#222" opacity="0"/>
+    <g id="ic_kamera_profil" data-name="ic_kamera profil" transform="translate(-15949 18085)">
+      <g transform="matrix(1, 0, 0, 1, -6, -4)" filter="url(#Path)">
+        <circle id="Path-2" data-name="Path" cx="24" cy="24" r="24" transform="translate(6 4)" fill="#fff"/>
+      </g>
+      <path id="Fill_1" data-name="Fill 1" d="M6.5,13A6.5,6.5,0,1,1,13,6.5,6.507,6.507,0,0,1,6.5,13Zm0-10c-.09,0-.181,0-.271.01A3.5,3.5,0,0,0,6.5,10c.09,0,.181,0,.272-.011A3.5,3.5,0,0,0,6.5,3Z" transform="translate(18 19)" fill="url(#linear-gradient)"/>
+      <path id="Fill_3" data-name="Fill 3" d="M24.1,48h-.2A24.006,24.006,0,0,1,14.658,1.886a24.006,24.006,0,0,1,18.75,44.2A23.843,23.843,0,0,1,24.1,48ZM14.5,16.5A2.5,2.5,0,0,0,12,19V31.5A2.5,2.5,0,0,0,14.5,34h20A2.5,2.5,0,0,0,37,31.5V19a2.5,2.5,0,0,0-2.5-2.5H31.786a2.483,2.483,0,0,1-1.768-.731l-1.036-1.038A2.486,2.486,0,0,0,27.215,14H21.786a2.483,2.483,0,0,0-1.768.731l-1.038,1.038a2.483,2.483,0,0,1-1.768.731Z" fill="url(#linear-gradient-2)"/>
+    </g>
+  </g>
+</svg>

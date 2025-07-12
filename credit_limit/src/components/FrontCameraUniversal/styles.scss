@@ -1,0 +1,50 @@
+.cameraFront,
+.cameraViewFront,
+.cameraSensorFront,
+.cameraOutputFront {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.cameraViewFront,
+.cameraSensorFront,
+.cameraOutputFront {
+  transform: scaleX(-1);
+  filter: FlipH;
+}
+
+.cameraTriggerContainerFront {
+  color: white;
+  font-size: 16px;
+  border: none;
+  padding: 15px 0px;
+  text-align: center;
+  position: fixed;
+  bottom: 30px;
+  width: 100%;
+}
+
+.cameraTriggerFront {
+  width: 100%;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  border-radius: 30px;
+  border: none;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cameraRetryFront {
+  font-size: 16px;
+  font-weight: 600;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.38;
+  letter-spacing: normal;
+  text-align: left;
+  color: #ffffff;
+}

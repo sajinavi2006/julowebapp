@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "noFallthroughCasesInSwitch": true,
+    "emitDeclarationOnly": false,
+    "noEmit": true,
+    "downlevelIteration": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react"
+  },
+  "extends": "@julofinance/tsconfig/index.json",
+  "include": ["./src"],
+  "exclude": ["./src/__mocks__"]
+}

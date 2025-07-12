@@ -1,0 +1,1 @@
+export type ChipTypes = 'default' | 'success' | 'info' | 'warning' | 'error' | 'tertiary' | undefined;

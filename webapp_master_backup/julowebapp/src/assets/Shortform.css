@@ -1,0 +1,124 @@
+.short-form {
+}
+.toolbar-shortform {
+  height: 100%;
+  width: 100%;
+  max-height: 15%;
+  background-color: #00acf0;
+  color: white;
+  position: fixed;
+  z-index: 90;
+  background: url('../assets/background/header01.jpg') center center repeat;
+  -webkit-box-shadow: 0 2px 12px 0px #777;
+  -moz-box-shadow: 0 2px 12px 0px #777;
+  box-shadow: 0 2px 12px 0px #777;
+}
+.body-shortform {
+  height: 100%;
+  width: 100%;
+  margin-top: 25%;
+  padding: 4%;
+}
+.toolbar-title {
+  max-height: 50%;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 4%;
+  font-weight: 400px;
+}
+.toolbar-tab {
+  max-height: 50%;
+  font-size: 15px;
+  text-align: center;
+  padding-top: 3%;
+  opacity: 0.5;
+}
+.tab-active {
+  opacity: 1;
+  font-weight: 400px;
+  border-bottom: 3px solid white;
+}
+.text-desc {
+  color: #5e5e5e;
+  text-align: left;
+  font-size: 15px;
+}
+.title-input {
+  color: #00acf0;
+  text-align: left;
+  font-size: 12px;
+  margin: 0 0 5px;
+}
+.card-camera {
+  width: 75%;
+  margin-bottom: 10px;
+  height: 160px;
+  background: url('../assets/camera.png') center center no-repeat;
+  background-size: 100px 100px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.date-dob {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+.btn-type-work {
+  color: white;
+  border-radius: 6px;
+  background-color: #00acf0 !important;
+}
+.input-text {
+  width: 100%;
+  padding: 5px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #5e5e5e;
+}
+.placeholder {
+  color: #a3a3a3 !important;
+}
+.select-color {
+  color: #5e5e5e !important;
+}
+.no-space {
+  padding: 0px !important;
+  margin: 0px !important;
+  min-height: 14px !important;
+}
+.clear-input {
+  color: #5e5e5e !important;
+  background-color: transparent;
+}
+.gender {
+  font-size: 14px;
+  color: #00acf0 !important;
+}
+.btn-lanjutkan {
+  color: white;
+  text-transform: capitalize;
+  padding: 0% 15% 0% 15%;
+  background-color: #00acf0 !important;
+}
+.text-error {
+  color: red;
+  font-size: 13px;
+  text-align: left;
+  float: left;
+}
+.border-error {
+  border: 1px solid red !important;
+}
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  font-size: 14px;
+  opacity: 0.5; /* Firefox */
+}
+.input-text:disabled {
+  background: #dddddd;
+}
+.input-error {
+  border: 1px solid red;
+}

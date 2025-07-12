@@ -1,0 +1,406 @@
+version: 2
+references:
+  ## Workspaces
+  workspace: &workspace
+    ~/julowebapp
+
+  ## Docker image configurations
+  credit_limit_config: &credit_limit_config
+    working_directory: *workspace
+    resource_class: julofinance/julo-circleci-runner
+    docker:
+      - image: cimg/node:18.10
+
+  refinancing_config: &refinancing_config
+    working_directory: *workspace
+    resource_class: julofinance/julo-circleci-runner
+    docker:
+      - image: cimg/node:14.21.3
+
+  ## Cache
+  #refinance
+  save_refinance_package_cache: &save_refinance_package_cache
+    save_cache:
+      key: dependency-cache-{{ checksum "refinancing/package.json" }}
+      paths:
+        - ./refinancing/node_modules
+
+  restore_refinance_package_cache: &restore_refinance_package_cache
+    restore_cache:
+      key: dependency-cache-{{ checksum "refinancing/package.json" }}
+
+  #credit_limit
+  save_credit_limit_package_cache: &save_credit_limit_package_cache
+    save_cache:
+      key: dependency-cache-{{ checksum "credit_limit/package.json" }}
+      paths:
+        - ./credit_limit/node_modules
+
+  restore_credit_limit_package_cache: &restore_credit_limit_package_cache
+    restore_cache:
+      key: dependency-cache-{{ checksum "credit_limit/package.json" }}
+
+jobs:
+  build_staging1:
+    <<: *credit_limit_config
+    steps:
+      - checkout
+      - *restore_credit_limit_package_cache
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install credit_limit dependencies
+          command: cd credit_limit && npm install --force
+      - *save_credit_limit_package_cache
+      - run:
+          name: build credit_limit
+          command: cd credit_limit && npm run build:staging
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/credit_limit/build oss://julowebapps-staging1/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-staging1/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+      - run:
+          name: Deployed in app-staging1.julo.co.id
+          command: echo "the code is deployed in app-staging1.julo.co.id"
+
+  build_staging2:
+    <<: *credit_limit_config
+    steps:
+      - checkout
+      - *restore_credit_limit_package_cache
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install credit_limit dependencies
+          command: cd credit_limit && npm install --force
+      - *save_credit_limit_package_cache
+      - run:
+          name: build credit_limit
+          command: cd credit_limit && npm run build:staging
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/credit_limit/build oss://julowebapps-staging2/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-staging2/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+      - run:
+          name: Deployed in app-staging2.julo.co.id
+          command: echo "the code is deployed in app-staging2.julo.co.id"
+
+  build_staging3:
+    <<: *credit_limit_config
+    steps:
+      - checkout
+      - *restore_credit_limit_package_cache
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install credit_limit dependencies
+          command: cd credit_limit && npm install --force
+      - *save_credit_limit_package_cache
+      - run:
+          name: build credit_limit
+          command: cd credit_limit && npm run build:staging
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/credit_limit/build oss://julowebapps-staging3/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-staging3/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+      - run:
+          name: Deployed in app-staging3.julo.co.id
+          command: echo "the code is deployed in app-staging3.julo.co.id"
+
+  refinancing_staging1:
+    <<: *refinancing_config
+    steps:
+      - checkout
+      - *restore_refinance_package_cache
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install refinancing dependencies
+          command: cd refinancing && npm install
+      - *save_refinance_package_cache
+      - run:
+          name: testing refinancing
+          command: cd refinancing && npm run test:unit
+      - run:
+          name: build refinancing
+          command: cd refinancing && NODE_ENV=production npm run buildstaging
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/refinancing/dist oss://julowebapps-staging1/refinancing/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-staging1/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+      - run:
+          name: Deployed in app-staging1.julo.co.id
+          command: echo "the code is deployed in app-staging1.julo.co.id"
+
+  build_uat:
+    <<: *credit_limit_config
+    steps:
+      - checkout
+      - *restore_credit_limit_package_cache
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install credit_limit dependencies
+          command: cd credit_limit && npm install --force
+      - *save_credit_limit_package_cache
+      - run:
+          name: build credit_limit
+          command: cd credit_limit && npm run build:uat
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/credit_limit/build oss://julowebapps-uat/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-uat/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+
+  refinancing_uat:
+    <<: *refinancing_config
+    steps:
+      - checkout
+      - *restore_refinance_package_cache
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install refinancing dependencies
+          command: cd refinancing && npm install
+      - *save_refinance_package_cache
+      - run:
+          name: testing refinancing
+          command: cd refinancing && npm run test:unit
+      - run:
+          name: build refinancing
+          command: cd refinancing && NODE_ENV=production npm run builduat
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/refinancing/dist oss://julowebapps-uat/refinancing/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-uat/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+
+  build_prod:
+    <<: *credit_limit_config
+    steps:
+      - checkout
+      - *restore_credit_limit_package_cache
+
+      - run:
+          name: Run install Sonarqube scanner
+          command: |
+            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.7.0.2747-linux.zip
+            unzip sonar-scanner-cli-4.7.0.2747-linux.zip
+      - run:
+          name: Run Sonarscanner
+          command: |
+            ./sonar-scanner-4.7.0.2747-linux/bin/sonar-scanner -Dsonar.host.url=${SONAR_HOST_URL} \
+                                                               -Dsonar.login=${SONAR_PROJECT_TOKEN} \
+                                                               -Dsonar.projectKey=julowebapp \
+                                                               -Dsonar.ws.timeout=300
+      
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install credit_limit dependencies
+          command: cd credit_limit && npm install --force
+      - *save_credit_limit_package_cache
+      - run:
+          name: build credit_limit
+          command: cd credit_limit && npm run build:prod
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/credit_limit/build oss://julowebapps-prod/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-prod/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+
+  refinancing_prod:
+    <<: *refinancing_config
+    steps:
+      - checkout
+      - *restore_refinance_package_cache
+      - run:
+          name: create file .npmrc to store github token
+          command: cd ~ && echo "//npm.pkg.github.com/:_authToken=${GitHubToken}" > .npmrc
+      - run:
+          name: install refinancing dependencies
+          command: cd refinancing && npm install
+      - *save_refinance_package_cache
+      - run:
+          name: testing refinancing
+          command: cd refinancing && npm run test:unit
+      - run:
+          name: build refinancing
+          command: cd refinancing && npm run build:prod
+      - run:
+          name: install oss
+          working_directory: ~
+          command: |
+            wget http://gosspublic.alicdn.com/ossutil/1.4.2/ossutil64
+            chmod 755 ossutil64
+            ./ossutil64 config -i ${AccessKeyID} -k ${AccessKeySecret} -L EN -e https://oss-ap-southeast-5.aliyuncs.com
+      - run:
+          name: copy data to oss
+          working_directory: ~
+          command: |
+            ./ossutil64 cp ~/julowebapp/refinancing/dist oss://julowebapps-prod/refinancing/ --recursive --update --jobs 50 --parallel 50
+      - run:
+          name: embed commit id
+          working_directory: ~
+          command: |
+            SHORT_GIT_HASH=$(echo $CIRCLE_SHA1 | cut -c -7)
+            echo $SHORT_GIT_HASH
+            echo y | ./ossutil64 set-meta oss://julowebapps-prod/ Cache-Control:no-cache#x-oss-meta-application-version:$SHORT_GIT_HASH --update -r --jobs 50 --include *.html
+workflows:
+  version: 2
+  upload:
+    jobs:
+      - refinancing_staging1:
+          filters:
+            branches:
+              only: /^staging1_.*/
+
+      - build_staging1:
+          filters:
+            branches:
+              only: /^staging1_.*/
+
+      - build_staging2:
+          filters:
+            branches:
+              only: /^staging2_.*/
+
+      - build_staging3:
+          filters:
+            branches:
+              only: /^staging3_.*/
+
+      - build_uat:
+          filters:
+            branches:
+              only: uat
+
+      - refinancing_uat:
+          filters:
+            branches:
+              only: uat
+
+      - build_prod:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+
+      - refinancing_prod:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+
+
